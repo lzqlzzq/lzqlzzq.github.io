@@ -1,0 +1,153 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css">
+        h1
+        {
+            text-align: center;
+        }
+        h3
+        {
+            text-align: center;
+        }
+        a
+        {
+            text-align: center;
+        }
+        div
+        {
+            text-align: center;
+            margin: 50px;
+        }
+        table
+        {
+            border: 1px solid;
+            margin: auto;
+            width: 500px;
+        }
+        td,th
+        {
+            text-align: center;
+            border: 1px solid;
+        }
+    </style>
+</head>
+<body>
+    <h1>GPA计算器（国音算法版）</h1>
+    <h3>不知为何国音的算法与通用的算法有些区别，用网上的计算器算出的结果比《教学管理手册》第79页规定的算出来的更高，于是写了个算法，计算结果仅供参考😉</h3>
+    <div>
+        <input type="number" id="score" placeholder="分数">
+        <input type="number" id="credit"  placeholder="学分">
+        <input type="button" value="添加" onClick="addRow()">
+        <input type="button" value="删除" onClick="delRow()">
+    </div>
+    <div>
+        <a id="prompt"></a>
+    </div>
+    <table id="table1">
+        <tr>
+            <th>分数</th>
+            <th>学分</th>
+            <th>绩点</th>
+            <th>学分绩点</th>
+        </tr>
+        <tr>
+            <th>总绩点</th>
+            <th id="GPA">0</th>
+        </tr>
+    </table>
+    <script type="text/javascript">
+        var flag = true;
+        var scores = new Array();
+        function addRow(){
+            var thisScore = Number(document.getElementById("score").value);
+            var thisCredit = Number(document.getElementById("credit").value);
+
+            document.getElementById("score").value = ""
+            document.getElementById("credit").value = ""
+
+            if(thisScore == 0){
+                document.getElementById("prompt").innerText = "没有输入分数也可能分数为0🤔";
+                return -1;
+            }
+            else{
+                document.getElementById("prompt").innerText = "";
+            }
+            if(thisCredit == 0){
+                document.getElementById("prompt").innerText = "没有输入学分🤥";
+                return -1;
+            }
+            else{
+                document.getElementById("prompt").innerText = "";
+            }
+
+            if(thisScore > 0 && thisScore <= 100){
+                document.getElementById("prompt").innerText = "";
+            }
+            else{
+                document.getElementById("prompt").innerText = "分数应当在0到100之间😇";
+                return -1;
+            }
+            if(thisCredit > 0 && thisCredit < 5 && Number.isInteger(thisCredit)){
+                document.getElementById("prompt").innerText = "";
+            }
+            else{
+                document.getElementById("prompt").innerText = "学分应当是1到4之间的整数😐";
+                return -1;
+            }
+            if(thisScore >= 60){
+                document.getElementById("prompt").innerText = "";
+            }
+            else{
+                document.getElementById("prompt").innerText = "分数不到60是没有绩点的，不用输了😅";
+                return -1;
+            }
+
+            thisRowNum = table1.rows.length - 1
+            var newTr=table1.insertRow(thisRowNum);
+            var newTd0=newTr.insertCell();
+            var newTd1=newTr.insertCell();
+            var newTd2=newTr.insertCell();
+            var newTd3=newTr.insertCell();
+            if(thisScore >= 90){
+                var thisPoint = 4;
+            }
+            else{
+                strScore = String(thisScore);
+                if(Number(strScore.slice(1)) >= 0 && Number(strScore.slice(1)) <= 2.99){
+                    var thisPoint = 0;
+                }
+                else if(Number(strScore.slice(1)) >= 3 && Number(strScore.slice(1)) <= 6.99){
+                    var thisPoint = 0.3;
+                }
+                else if(Number(strScore.slice(1)) >= 7 && Number(strScore.slice(1)) <= 9.99){
+                    var thisPoint = 0.7;
+                }
+                thisPoint += Number(strScore[0]) - 5;
+            }
+
+            var thisData = {"score": thisScore, "credit": thisCredit, "creditPoint": thisPoint * thisCredit};
+            scores.push(thisData);
+            newTd0.innerText = thisData.score;
+            newTd1.innerText = thisData.credit;
+            newTd2.innerText = thisPoint;
+            newTd3.innerText = thisData.creditPoint;
+            evalGPA();
+        }
+        function delRow(){
+            if(table1.rows.length > 2){
+                table1.deleteRow(table1.rows.length - 2);
+                scores.pop()
+                evalGPA();
+                }
+            }
+        function evalGPA(){
+            var GP = 0;
+            var GC = 0;
+            for(var i = 0; i < scores.length; i++){
+                GP += scores[i].creditPoint;
+                GC += scores[i].credit;
+            }
+            document.getElementById("GPA").innerText = (GP / GC).toFixed(6);
+        }
+    </script>
+</body>
