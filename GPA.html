@@ -95,13 +95,6 @@
                 document.getElementById("prompt").innerText = "学分应当是1到4之间的整数😐";
                 return -1;
             }
-            if(thisScore >= 60){
-                document.getElementById("prompt").innerText = "";
-            }
-            else{
-                document.getElementById("prompt").innerText = "分数不到60是没有绩点的，不用输了😅";
-                return -1;
-            }
 
             if(thisScore == 66){
                 document.getElementById("prompt").innerText = "真吉利🥰";
@@ -118,6 +111,10 @@
             var newTd3=newTr.insertCell();
             if(thisScore >= 90){
                 var thisPoint = 4;
+            }
+            else if(thisScore < 60){
+                var thisPoint = 0
+                document.getElementById("prompt").innerText = "加油哦😅"
             }
             else{
                 strScore = String(thisScore);
