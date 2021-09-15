@@ -65,6 +65,9 @@
             document.getElementById("score").value = ""
             document.getElementById("credit").value = ""
 
+            if(thisScore == 66.66){
+                document.getElementById("prompt").innerText = "真吉利🥰";
+            }
             if(thisScore == 0){
                 document.getElementById("prompt").innerText = "没有输入分数也可能分数为0🤔";
                 return -1;
