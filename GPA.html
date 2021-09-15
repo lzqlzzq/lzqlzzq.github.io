@@ -65,9 +65,6 @@
             document.getElementById("score").value = ""
             document.getElementById("credit").value = ""
 
-            if(thisScore == 66.66){
-                document.getElementById("prompt").innerText = "真吉利🥰";
-            }
             if(thisScore == 0){
                 document.getElementById("prompt").innerText = "没有输入分数也可能分数为0🤔";
                 return -1;
@@ -103,6 +100,13 @@
             else{
                 document.getElementById("prompt").innerText = "分数不到60是没有绩点的，不用输了😅";
                 return -1;
+            }
+
+            if(thisScore == 66){
+                document.getElementById("prompt").innerText = "真吉利🥰";
+            }
+            else if(thisScore == 88
+                document.getElementById("prompt").innerText = "不知道，只知道8月8日乃琳生日会😋";
             }
 
             thisRowNum = table1.rows.length - 1
