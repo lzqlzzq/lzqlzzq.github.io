@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+		<script src="/static/js/live2dcubismcore.js"></script>
+		<script src="/static/js/bundle.js"></script>
+		<script src="/static/js/message.js"></script>
+		<link rel="stylesheet" type='text/css' href="/static/css/live2d.css">
+	</head>
+
+	<body>
+		1234567890
+		<button>a</button>
+		<button>b</button>
+		<button>c</button>
+		<button>d</button>
+		<button>e</button>
+		<button>f</button>
+		<div class="live2d-main">
+			<div class="live2d-tips"></div>
+			<canvas id="live2d" width="400" height="400"></canvas>
+		</div>
+		<script type="text/javascript">
+			var resourcesPath = '/model/'; // 指定资源文件（模型）保存的路径
+			var backImageName = ''; // 指定背景图片
+			var modelDir = ['hiyori_free_t08']; // 指定需要加载的模型
+			initDefine(resourcesPath, backImageName, modelDir); // 初始化模型
+		</script>
+	</body>
+</html>

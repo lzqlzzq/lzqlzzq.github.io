@@ -1,0 +1,28 @@
+.live2d-main {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.live2d-tips {
+    opacity: 0;
+    margin: -20px 0px;
+    padding: 5px 10px;
+    border: 1px solid rgba(224, 186, 140, 0.62);
+    border-radius: 12px;
+    background-color: rgba(236, 217, 188, 0.5);
+    box-shadow: 0 3px 15px 2px rgba(191, 158, 118, 0.2);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    position: relative;
+    animation-delay: 5s;
+    animation-duration: 50s;
+    animation-iteration-count: infinite;
+    animation-name: shake;
+    animation-timing-function: ease-in-out;
+}
+
+.live2d-main .live2d{
+    position: relative;
+}
